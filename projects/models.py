@@ -4,6 +4,22 @@ from django.db import models
 import uuid
 
 
+class Tags(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)  # I used uuid to make easier the id
+    # field
+    name = models.CharField(max_length=100)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Tags'
+        verbose_name_plural = 'Tags'
+        ordering = ('-date_created',)
+
+    def __str__(self):
+        return self.name
+
+
 class Project(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)  # I used uuid to make easier the id
     # field
@@ -14,12 +30,12 @@ class Project(models.Model):
     image = models.ImageField(upload_to='projects/%Y/%m/%d/')
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
+    tags = models.ManyToManyField(Tags, related_name='projects', blank=True)
 
+    class Meta:
+        verbose_name = 'Projects'
+        verbose_name_plural = 'Projects'
+        ordering = ('-date_created',)
 
-class Tags(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)  # I used uuid to make easier the id
-    # field
-    name = models.CharField(max_length=100)
-    date_created = models.DateTimeField(auto_now_add=True)
-    date_updated = models.DateTimeField(auto_now=True)
-    projects = models.ManyToManyField(Project, related_name='tags', blank=True, null=True)
+    def __str__(self):
+        return self.name
