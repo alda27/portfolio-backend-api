@@ -23,14 +23,14 @@ class Tags(models.Model):
 class Project(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)  # I used uuid to make easier the id
     # field
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)
     description = models.TextField()
     url_project_online = models.URLField()  # url of the project online
     url_source_project = models.URLField()  # url of the source code project in github
-    image = models.ImageField(upload_to='projects/%Y/%m/%d/')
+    image = models.ImageField(upload_to='projects/%Y/%m/%d/', default='projects/default.jpg')
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
-    tags = models.ManyToManyField(Tags, related_name='projects', blank=True)
+    tags = models.ManyToManyField(Tags, related_name='project', blank=True)
 
     class Meta:
         verbose_name = 'Projects'
