@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',  # new
     'rest_auth.registration',  # new
 
-    'corsheaders', # new
+    'corsheaders',  # new
 
     # locals apps
     'pages.apps.PagesConfig',
@@ -57,7 +57,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware', # new
+    'corsheaders.middleware.CorsMiddleware',  # new
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -161,7 +161,6 @@ REST_FRAMEWORK = {
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # new
 SITE_ID = 1  # new
-
 
 # new
 CORS_ORIGIN_WHITELIST = (
