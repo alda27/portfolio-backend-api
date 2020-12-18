@@ -8,7 +8,7 @@ import uuid
 class Tags(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)  # I used uuid to make easier the id
     # field
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, blank=False, unique=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
@@ -23,7 +23,7 @@ class Tags(models.Model):
 
 class Category(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, blank=False, unique=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
@@ -38,7 +38,7 @@ class Category(models.Model):
 
 class Article(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    title = models.CharField(max_length=250)
+    title = models.CharField(max_length=250, blank=False, unique=True)
     content_prev = models.CharField(max_length=250)
     body = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
