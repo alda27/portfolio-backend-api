@@ -2,23 +2,23 @@ from django.shortcuts import render
 
 from rest_framework import generics
 
-from .models import Article, Category, Tags
-from .serializers import ArticleSerializer, CategorySerializer, TagsSerializer
+from .models import Article, Category  # Tags
+from .serializers import ArticleSerializer, CategorySerializer  # TagsSerializer
 
 
 # Create your views here.
 
-
-class ListTags(generics.ListCreateAPIView):
-    queryset = Tags.objects.all()
-    serializer_class = TagsSerializer
-    name = 'tags_list'
-
-
-class DetailTags(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Tags.objects.all()
-    serializer_class = TagsSerializer
-    name = 'tags_detail'
+#
+# class ListTags(generics.ListCreateAPIView):
+#     queryset = Tags.objects.all()
+#     serializer_class = TagsSerializer
+#     name = 'tags_list'
+#
+#
+# class DetailTags(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Tags.objects.all()
+#     serializer_class = TagsSerializer
+#     name = 'tags_detail'
 
 
 class ListCategory(generics.ListCreateAPIView):
