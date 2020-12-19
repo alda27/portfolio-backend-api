@@ -24,7 +24,7 @@ class DetailTags(generics.RetrieveUpdateDestroyAPIView):
 class ListProject(generics.ListCreateAPIView):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
-    name = 'projects'
+    name = 'projects_list'
 
 
 class DetailProject(generics.RetrieveUpdateDestroyAPIView):
