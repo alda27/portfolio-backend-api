@@ -39,12 +39,12 @@ INSTALLED_APPS = [
 
     # Django rest framework
     'rest_framework',
-    'rest_framework.authtoken',
-    'rest_auth',
-    'allauth',  # new
-    'allauth.account',  # new
-    'allauth.socialaccount',  # new
-    'rest_auth.registration',  # new
+    'rest_framework.authtoken',  # app to make authenticate with token
+    # 'rest_auth',
+    # 'allauth',  # new
+    # 'allauth.account',  # new
+    # 'allauth.socialaccount',  # new
+    # 'rest_auth.registration',  # new
 
     'corsheaders',  # new
 
@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'projects.apps.ProjectsConfig',
     'blog.apps.BlogConfig',
+    'skills.apps.SkillsConfig',
+    'authentication.apps.AuthenticationConfig',
 ]
 
 MIDDLEWARE = [
@@ -139,15 +141,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # Django rest framework
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+
     ],
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_PAGINATION_CLASS': 'projects.custompagination.LimitedOffsetPaginationProjects',
     'PAGE_SIZE': 9,
     'DEFAULT_THROTTLE_CLASSES': [  # limiting making request to our api
         'rest_framework.throttling.AnonRateThrottle',
@@ -158,7 +163,6 @@ REST_FRAMEWORK = {
         'user': '1000/day'
     }
 }
-
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # new
 SITE_ID = 1  # new
 
