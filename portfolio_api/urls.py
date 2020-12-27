@@ -23,7 +23,9 @@ urlpatterns = [
                   path('api/v1/', include('pages.urls')),
                   path('api/v1/projects/', include('projects.urls')),
                   path('api/v1/blog/', include('blog.urls')),
-                  path('api-auth/', include('rest_framework.urls')),
-                  path('api/v1/rest-auth/', include('rest_auth.urls')),
-                  path('api/v1/rest-auth/registration/', include('rest_auth.registration.urls')),  # new
+                  path('api/v1/skills/', include('skills.urls')),
+                  path('api/v1/', include('authentication.urls')),
+                  # path('api-auth/', include('rest_framework.urls')),
+                  # path('api/v1/rest-auth/', include('rest_auth.urls')),
+                  # path('api/v1/rest-auth/registration/', include('rest_auth.registration.urls')),  # new
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
