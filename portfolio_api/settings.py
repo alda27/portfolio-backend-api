@@ -35,16 +35,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',  # new
+    'django.contrib.sites',  # # authentication with django-allauth third-party package
 
     # Django rest framework
     'rest_framework',
-    'rest_framework.authtoken',  # app to make authenticate with token
-    # 'rest_auth',
-    # 'allauth',  # new
-    # 'allauth.account',  # new
-    # 'allauth.socialaccount',  # new
-    # 'rest_auth.registration',  # new
+    'rest_framework.authtoken',  # app to make authenticate with token Django rest framework
+
+    'allauth',  # new
+    'allauth.account',  # # authentication with django-allauth third-party package
+    'allauth.socialaccount',  # # authentication with django-allauth third-party package
+    'rest_auth',  # authentication with django-rest-auth third-party package
+    'rest_auth.registration',  # # authentication with django-allauth third-party package
 
     'corsheaders',  # new
 
@@ -53,13 +54,13 @@ INSTALLED_APPS = [
     'projects.apps.ProjectsConfig',
     'blog.apps.BlogConfig',
     'skills.apps.SkillsConfig',
-    'authentication.apps.AuthenticationConfig',
+    # 'authentication.apps.AuthenticationConfig',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',  # new
+    'corsheaders.middleware.CorsMiddleware',  # this allows
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -148,23 +149,31 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
 
     ],
-    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'DEFAULT_PAGINATION_CLASS': 'projects.custompagination.LimitedOffsetPaginationProjects',
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    # 'DEFAULT_PAGINATION_CLASS': 'projects.custompagination.LimitedOffsetPaginationProjects',
     'PAGE_SIZE': 9,
     'DEFAULT_THROTTLE_CLASSES': [  # limiting making request to our api
         'rest_framework.throttling.AnonRateThrottle',
         'rest_framework.throttling.UserRateThrottle'
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '100/day',
-        'user': '1000/day'
+        'anon': '10000/day',
+        'user': '100000/day'
     }
 }
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # new
-SITE_ID = 1  # new
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # authentication with django-allauth third-party
+# package The email back-end config is needed since by default an email will be sent when a new
+# user is registered, asking them to confirm their account. Rather than also set up an
+# email server, we will output the emails to the console with the console.EmailBackend
+# setting.
+SITE_ID = 1  # # authentication with django-allauth third-party package SITE_ID is part of the built-in Django
+# “sites” framework which is a way to host multiple
+# websites from the same Django project. We obviously only have one site we are
+# working on here but django-allauth uses the sites framework, so we must specify
+# a default setting
 
 # new
 CORS_ORIGIN_WHITELIST = (

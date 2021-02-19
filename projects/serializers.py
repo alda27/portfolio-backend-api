@@ -10,7 +10,7 @@ class TagsSerializer(serializers.ModelSerializer):
 
 class ProjectSerializer(serializers.ModelSerializer):
     tags = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='tags_detail')  # Serializer
-    # relations. The relationship must have the same name that we specified in related_name attribute
+    # relations. The relationship must have the same name that we specified in view details(views.py) attribute
 
     class Meta:
         model = Project

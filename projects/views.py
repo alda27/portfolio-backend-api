@@ -1,7 +1,7 @@
 # from django.shortcuts import render
 
 from rest_framework import generics
-
+from rest_framework.permissions import IsAuthenticated
 from .models import Project, Tags
 from .serializers import ProjectSerializer, TagsSerializer
 
@@ -24,6 +24,7 @@ class DetailTags(generics.RetrieveUpdateDestroyAPIView):
 class ListProject(generics.ListCreateAPIView):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
+    # permission_classes = (IsAuthenticated,)
     name = 'projects_list'
 
 
