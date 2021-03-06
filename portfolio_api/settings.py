@@ -11,18 +11,22 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-
+import environ
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# environ tools
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'sifpq5u-mxb0e6n2k&hc5%f6+q)8%6lx&o)wv7i-6_1_4!&5=z'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -94,10 +98,11 @@ WSGI_APPLICATION = 'portfolio_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'alda',
-        'NAME': 'portfolio',
-        'PASSWORD': 'amunozro8970',
+        'USER': env('POSTGRES_USER'),
+        'NAME': env('POSTGRES_NAME'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
         'HOST': '',
+        'PORT': env('POSTGRES_PORT')
     }
 }
 
